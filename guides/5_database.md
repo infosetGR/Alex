@@ -494,6 +494,34 @@ Only use allowed values for regions, sectors, and asset classes
 cat src/schemas.py
 ```
 
+## Option: PostgreSQL RDS
+
+If you prefer to use a traditional PostgreSQL setup instead of Aurora Serverless v2, you can either:
+
+1. **Create a new PostgreSQL instance in AWS RDS**: Follow the AWS RDS setup guide to create a PostgreSQL database. Ensure the database is publicly accessible or within your VPC, depending on your security requirements.
+2. **Use an existing PostgreSQL connection string**: If you already have a PostgreSQL database, you can use its connection string directly.
+
+### Configuration
+
+- The system will use the `alex` schema for all database operations.
+- Update your environment variables or configuration file to include the PostgreSQL connection string.
+
+### Resetting the Database
+
+To reset the database schema and seed data, run the following commands:
+
+```bash
+# From backend/database directory
+uv run reset_db.py
+```
+
+This script will:
+- Drop and recreate the `alex` schema.
+- Apply the latest migrations.
+- Seed the database with initial data.
+
+> Note: Terraform is not required for this setup. You can manage the database manually or through your preferred tools.
+
 ## Next Steps
 
 Excellent! You now have a production-grade database with:
